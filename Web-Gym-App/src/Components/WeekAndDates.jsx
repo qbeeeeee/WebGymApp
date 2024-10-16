@@ -35,7 +35,7 @@ const WeekAndDates = () => {
           return (
             <div
               key={day}
-              className={`text-center p-4 font-semibold cursor-pointer rounde-sm transition duration-300 ${
+              className={`text-center p-4 font-semibold cursor-pointer rounded-md transition duration-300 ${
                 index === currentDayIndex
                   ? "bg-custom-yellow text-black"
                   : "bg-gray-200 text-gray-700"
