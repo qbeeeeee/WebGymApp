@@ -9,6 +9,7 @@ import pullup from "./pullup.svg";
 import pushUp from "./pushUp.svg";
 import seatedCableRows from "./seatedCableRows.svg";
 import shoulderPress from "./shoulderPress.svg";
+import defaultBack from "./defaultBack.svg";
 
 let chestExercises = [
   {
@@ -58,6 +59,21 @@ let backExercises = [
     id: 3,
     name: "Seated Cable Rows",
     image: seatedCableRows,
+  },
+  {
+    id: 4,
+    name: "T-Bar row",
+    image: defaultBack,
+  },
+  {
+    id: 5,
+    name: "Cable Pullover",
+    image: defaultBack,
+  },
+  {
+    id: 6,
+    name: "Reverse Dumbell Fly",
+    image: defaultBack,
   },
 ];
 

@@ -6,6 +6,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
 
+const navLinks = [
+  { path: "/", label: "Home" },
+  { path: "/trackmyworkout", label: "Track My Workout" },
+  { path: "/addworkout", label: "Add Workout" },
+  { path: "/about", label: "About Us" },
+  { path: "/analytics", label: "Analytics" },
+  { path: "/contact", label: "Contact Us" },
+];
+
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -88,24 +97,11 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex flex-col items-start mt-20 space-y-6 px-6">
-            <a href="/" className="text-black text-xl">
-              Home
-            </a>
-            <a href="/trackmyworkout" className="text-black text-xl">
-              Track My Workout
-            </a>
-            <a href="/classes" className="text-black text-xl">
-              Classes
-            </a>
-            <a href="/about" className="text-black text-xl">
-              About Us
-            </a>
-            <a href="/pricing" className="text-black text-xl">
-              Pricing
-            </a>
-            <a href="/contact" className="text-black text-xl">
-              Contact Us
-            </a>
+            {navLinks.map(({ path, label }) => (
+              <a key={path} href={path} className="text-black text-xl">
+                {label}
+              </a>
+            ))}
             {currentUser ? (
               <button
                 onClick={handleSignout}
@@ -129,56 +125,17 @@ const Navbar = () => {
 
         {/* Links - Desktop */}
         <div className="hidden md:flex items-center space-x-4">
-          <a
-            href="/"
-            className={`hover:text-red-700 transition duration-300  ${
-              currentPath === "/" ? "border-b-4 border-red-500" : ""
-            }`}
-          >
-            Home
-          </a>
-          <a
-            href="/trackmyworkout"
-            className={`hover:text-red-700 transition duration-300  ${
-              currentPath === "/trackmyworkout"
-                ? "border-b-4 border-red-500"
-                : ""
-            }`}
-          >
-            Track My Workout
-          </a>
-          <a
-            href="/addworkout"
-            className={`hover:text-red-700 transition duration-300  ${
-              currentPath === "/addworkout" ? "border-b-4 border-red-500" : ""
-            }`}
-          >
-            Add Workout
-          </a>
-          <a
-            href="/about"
-            className={`hover:text-red-700 transition duration-300  ${
-              currentPath === "/about" ? "border-b-4 border-red-500" : ""
-            }`}
-          >
-            About Us
-          </a>
-          <a
-            href="/pricing"
-            className={`hover:text-red-700 transition duration-300  ${
-              currentPath === "/pricing" ? "border-b-4 border-red-500" : ""
-            }`}
-          >
-            Pricing
-          </a>
-          <a
-            href="/contact"
-            className={`hover:text-red-700 transition duration-300  ${
-              currentPath === "/contact" ? "border-b-4 border-red-500" : ""
-            }`}
-          >
-            Contact Us
-          </a>
+          {navLinks.map(({ path, label }) => (
+            <a
+              key={path}
+              href={path}
+              className={`hover:text-red-700 transition duration-300 ${
+                currentPath === path ? "border-b-4 border-red-500" : ""
+              }`}
+            >
+              {label}
+            </a>
+          ))}
           {currentUser ? (
             <button
               onClick={handleSignout}

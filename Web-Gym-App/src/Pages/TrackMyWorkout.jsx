@@ -1,12 +1,14 @@
 import React from "react";
 import WeekAndDates from "../Components/WeekAndDates";
-import ChestWorkout from "../Components/Workouts/ChestWorkout";
-import BackWorkout from "../Components/Workouts/BackWorkout";
-import LegWorkout from "../Components/Workouts/LegWorkout";
-import BicepsWorkout from "../Components/Workouts/BicepsWorkout";
-import TricepsWorkout from "../Components/Workouts/TricepsWorkout";
+import ChestWorkout from "../Components/WorkoutsText/ChestWorkout";
+import BackWorkout from "../Components/WorkoutsText/BackWorkout";
+import LegWorkout from "../Components/WorkoutsText/LegWorkout";
+import BicepsWorkout from "../Components/WorkoutsText/BicepsWorkout";
+import TricepsWorkout from "../Components/WorkoutsText/TricepsWorkout";
+import { useNavigate } from "react-router-dom";
 
 const TrackMyWorkout = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col items-center bg-neutral-900">
       <div className="text-red-500 text-md font-bold absolute left-[6%] top-[15%] flex gap-2">
@@ -30,13 +32,48 @@ const TrackMyWorkout = () => {
 
       <div className="flex flex-col mt-24 items-center mb-48">
         <div className="flex gap-10">
-          <ChestWorkout />
-          <BackWorkout />
-          <LegWorkout />
+          <div
+            onClick={() => {
+              navigate("/addworkout", { state: { workoutType: "Chest" } });
+              window.scrollTo(0, 0);
+            }}
+          >
+            <ChestWorkout />
+          </div>
+          <div
+            onClick={() => {
+              navigate("/addworkout", { state: { workoutType: "Back" } });
+              window.scrollTo(0, 0);
+            }}
+          >
+            <BackWorkout />
+          </div>
+          <div
+            onClick={() => {
+              navigate("/addworkout", { state: { workoutType: "Legs" } });
+              window.scrollTo(0, 0);
+            }}
+          >
+            <LegWorkout />
+          </div>
         </div>
         <div className="flex gap-10 mt-32">
-          <BicepsWorkout />
-          <TricepsWorkout />
+          <div
+            onClick={() => {
+              navigate("/addworkout", { state: { workoutType: "Biceps" } });
+              window.scrollTo(0, 0);
+            }}
+          >
+            <BicepsWorkout />
+          </div>
+          <div
+            onClick={() => {
+              navigate("/addworkout", { state: { workoutType: "Triceps" } });
+              window.scrollTo(0, 0);
+            }}
+          >
+            <TricepsWorkout />
+          </div>
         </div>
       </div>
     </div>
