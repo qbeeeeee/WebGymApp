@@ -6,13 +6,16 @@ import { BrowserRouter } from "react-router-dom";
 import { store, persistor } from "./redux/store.js";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import WorkoutContextProvider from "./Context/WorkoutContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <PersistGate persistor={persistor}>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <WorkoutContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </WorkoutContextProvider>
     </Provider>
   </PersistGate>
 );

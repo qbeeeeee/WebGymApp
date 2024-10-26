@@ -23,7 +23,7 @@ const AddWorkout = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-neutral-900 text-white">
-      <div className="fixed top-[15%] left-[80%] w-full">
+      <div className="fixed top-[15%] left-[80%] w-full z-40">
         <AllWorkout
           allExercises={allExercises}
           setAllExercises={setAllExercises}

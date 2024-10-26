@@ -1,5 +1,5 @@
 import React from "react";
-import chestWorkout from "./../../assets/img/chestWorkout.jpg";
+import chestWorkout from "./../../../assets/img/chestWorkout.jpg";
 
 const ChestWorkout = () => {
   return (

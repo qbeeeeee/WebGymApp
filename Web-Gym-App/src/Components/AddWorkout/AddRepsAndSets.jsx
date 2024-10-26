@@ -55,6 +55,17 @@ const AddChestWorkout = ({ setAllExercises, exercise, allExercises }) => {
       return;
     }
 
+    // Check if any set in setsData has an empty value for kg or reps
+    const hasIncompleteSet = setsData.some(
+      (set) => set.kg === "" || set.reps === ""
+    );
+    if (hasIncompleteSet) {
+      console.log(
+        `Please fill in all kg and reps values before adding the workout.`
+      );
+      return;
+    }
+
     // If not, add the new exercise
     const workoutData = {
       exercise: exerciseName,
@@ -62,6 +73,8 @@ const AddChestWorkout = ({ setAllExercises, exercise, allExercises }) => {
     };
 
     setAllExercises((prevWorkouts) => [...prevWorkouts, workoutData]);
+    setExerciseName("");
+    setNumberOfSets(0);
   };
 
   return (
@@ -162,76 +175,85 @@ const AddChestWorkout = ({ setAllExercises, exercise, allExercises }) => {
           </div>
         </div>
 
-        <div className="bg-neutral-800 p-5 rounded-lg mb-14 w-[450px]">
-          <div className="flex items-center justify-center space-x-4">
-            <h3 className="text-lg font-semibold">Number of Sets</h3>
-            <input
-              type="number"
-              className="border w-[75px] text-black rounded-md px-4 py-2 focus:outline-none focus:ring-1 
-    focus:ring-red-500 focus:border-transparent transition duration-200 ease-in-out"
-              placeholder={numberOfSets.toString() || "0"}
-              value={numberOfSets}
-              onChange={(e) => {
-                const value = Number(e.target.value);
-                if (value <= 5 && value >= 0) {
-                  setNumberOfSets(value);
-                }
-              }}
-            />
+        {allExercises.some(
+          (workout) =>
+            workout.exercise.toLowerCase() === exerciseName.toLowerCase()
+        ) ? (
+          <div className="bg-neutral-800 p-5 mt-4 rounded-lg mb-14 w-[450px] flex items-center justify-center">
+            <div>Already added this exercise</div>
           </div>
-
-          <div className="bg-neutral-700 p-6 rounded-lg shadow-lg max-w-md mx-auto mt-5">
-            <div className="grid grid-cols-4 gap-4 text-white mb-4 border-b border-gray-600 pb-3">
-              <div className="text-center text-lg font-semibold">Set</div>
-              <div className="text-center text-lg font-semibold">Prev</div>
-              <div className="text-center text-lg font-semibold">Kg</div>
-              <div className="text-center text-lg font-semibold">Reps</div>
+        ) : (
+          <div className="bg-neutral-800 p-5 rounded-lg mb-14 w-[450px]">
+            <div className="flex items-center justify-center space-x-4">
+              <h3 className="text-lg font-semibold">Number of Sets</h3>
+              <input
+                type="number"
+                className="border w-[75px] text-black rounded-md px-4 py-2 focus:outline-none focus:ring-1 
+    focus:ring-red-500 focus:border-transparent transition duration-200 ease-in-out"
+                placeholder={numberOfSets.toString() || "0"}
+                value={numberOfSets}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value <= 5 && value >= 0) {
+                    setNumberOfSets(value);
+                  }
+                }}
+              />
             </div>
 
-            {Array.from({ length: numberOfSets }, (_, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-4 gap-4 mt-4 items-center text-white border-b border-gray-600 pb-3"
-              >
-                <div className="text-center text-lg">{index + 1}</div>
-                <div className="text-center text-lg">40x10</div>
-                <input
-                  type="number"
-                  placeholder="Kg"
-                  onChange={(e) =>
-                    handleInputChange(index, "kg", e.target.value)
-                  }
-                  className="border border-gray-500 rounded-lg px-4 py-2 w-[90px] bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 
-           focus:ring-red-500 focus:border-transparent transition duration-200 ease-in-out"
-                />
-                <input
-                  type="number"
-                  placeholder="Reps"
-                  onChange={(e) =>
-                    handleInputChange(index, "reps", e.target.value)
-                  }
-                  className="border border-gray-500 rounded-lg px-4 py-2 w-[90px] bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 
-           focus:ring-red-500 focus:border-transparent transition duration-200 ease-in-out"
-                />
+            <div className="bg-neutral-700 p-6 rounded-lg shadow-lg max-w-md mx-auto mt-5">
+              <div className="grid grid-cols-4 gap-4 text-white mb-4 border-b border-gray-600 pb-3">
+                <div className="text-center text-lg font-semibold">Set</div>
+                <div className="text-center text-lg font-semibold">Prev</div>
+                <div className="text-center text-lg font-semibold">Kg</div>
+                <div className="text-center text-lg font-semibold">Reps</div>
               </div>
-            ))}
 
-            {numberOfSets > 0 && (
-              <div className="flex items-center justify-center mt-6">
-                <button
-                  className="flex justify-center items-center bg-red-500 w-full h-12 text-lg font-semibold text-white rounded-lg 
-           shadow-lg hover:bg-red-600 transition-colors duration-300 ease-in-out"
-                  style={{ boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.3)" }}
-                  onClick={() => handleAddWorkout(exerciseName)}
+              {Array.from({ length: numberOfSets }, (_, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-4 gap-4 mt-4 items-center text-white border-b border-gray-600 pb-3"
                 >
-                  Add Workout
-                </button>
-              </div>
-            )}
-          </div>
+                  <div className="text-center text-lg">{index + 1}</div>
+                  <div className="text-center text-lg">40x10</div>
+                  <input
+                    type="number"
+                    placeholder="Kg"
+                    onChange={(e) =>
+                      handleInputChange(index, "kg", e.target.value)
+                    }
+                    className="border border-gray-500 rounded-lg px-4 py-2 w-[90px] bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 
+           focus:ring-red-500 focus:border-transparent transition duration-200 ease-in-out"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Reps"
+                    onChange={(e) =>
+                      handleInputChange(index, "reps", e.target.value)
+                    }
+                    className="border border-gray-500 rounded-lg px-4 py-2 w-[90px] bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 
+           focus:ring-red-500 focus:border-transparent transition duration-200 ease-in-out"
+                  />
+                </div>
+              ))}
 
-          {/* Store All Workouts */}
-        </div>
+              {numberOfSets > 0 && (
+                <div className="flex items-center justify-center mt-6">
+                  <button
+                    className="flex justify-center items-center bg-red-500 w-full h-12 text-lg font-semibold text-white rounded-lg 
+           shadow-lg hover:bg-red-600 transition-colors duration-300 ease-in-out"
+                    style={{ boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.3)" }}
+                    onClick={() => handleAddWorkout(exerciseName)}
+                  >
+                    Add Workout
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Store All Workouts */}
+          </div>
+        )}
       </div>
     </div>
   );
