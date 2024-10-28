@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import {
   chestExercises,
   backExercises,
+  legExercises,
+  bicepsExercises,
+  tricepsExercises,
 } from "../../assets/img/exercises/allExercises";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
@@ -19,6 +22,12 @@ const AddChestWorkout = ({ setAllExercises, exercise, allExercises }) => {
       setDisplayExercises(chestExercises);
     } else if (exercise === "Back") {
       setDisplayExercises(backExercises);
+    } else if (exercise === "Legs") {
+      setDisplayExercises(legExercises);
+    } else if (exercise === "Biceps") {
+      setDisplayExercises(bicepsExercises);
+    } else if (exercise === "Triceps") {
+      setDisplayExercises(tricepsExercises);
     }
   });
 
@@ -183,12 +192,15 @@ const AddChestWorkout = ({ setAllExercises, exercise, allExercises }) => {
             <div>Already added this exercise</div>
           </div>
         ) : (
-          <div className="bg-neutral-800 p-5 rounded-lg mb-14 w-[450px]">
+          <div className="border-2 p-5 mt-2 rounded-lg border-gray-600 mb-24 w-[450px]">
             <div className="flex items-center justify-center space-x-4">
-              <h3 className="text-lg font-semibold">Number of Sets</h3>
+              <div className="flex flex-col mt-1">
+                <h3 className="text-lg font-semibold">Number of Sets</h3>
+                <hr className="w-[100%] h-0.5 mt-1 bg-red-500 border-0 mb-4" />
+              </div>
               <input
                 type="number"
-                className="border w-[75px] text-black rounded-md px-4 py-2 focus:outline-none focus:ring-1 
+                className="border border-gray-600 w-[75px] text-white bg-neutral-800 rounded-md px-4 py-2 focus:outline-none focus:ring-1 
     focus:ring-red-500 focus:border-transparent transition duration-200 ease-in-out"
                 placeholder={numberOfSets.toString() || "0"}
                 value={numberOfSets}
@@ -201,7 +213,7 @@ const AddChestWorkout = ({ setAllExercises, exercise, allExercises }) => {
               />
             </div>
 
-            <div className="bg-neutral-700 p-6 rounded-lg shadow-lg max-w-md mx-auto mt-5">
+            <div className="p-2 max-w-md mx-auto mt-5">
               <div className="grid grid-cols-4 gap-4 text-white mb-4 border-b border-gray-600 pb-3">
                 <div className="text-center text-lg font-semibold">Set</div>
                 <div className="text-center text-lg font-semibold">Prev</div>
@@ -214,8 +226,10 @@ const AddChestWorkout = ({ setAllExercises, exercise, allExercises }) => {
                   key={index}
                   className="grid grid-cols-4 gap-4 mt-4 items-center text-white border-b border-gray-600 pb-3"
                 >
-                  <div className="text-center text-lg">{index + 1}</div>
-                  <div className="text-center text-lg">40x10</div>
+                  <div className="text-center text-gray-400 text-lg">
+                    {index + 1}
+                  </div>
+                  <div className="text-center text-gray-400 text-lg">40x10</div>
                   <input
                     type="number"
                     placeholder="Kg"

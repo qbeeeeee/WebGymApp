@@ -7,17 +7,25 @@ export const allexercises = async (req, res, next) => {
     return next(errorHandler(400, "User ID and exercises are required."));
   }
 
-  const date = new Date().setHours(0, 0, 0, 0); // Ensure date is set to today's date without time
+  const date = new Date();
+  const year = date.getFullYear(); // Gets the current year
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Gets the current month (0-11) and pads with a leading zero
+  const day = String(date.getDate()).padStart(2, "0"); // Gets the current day and pads with a leading zero
+
+  const formattedDate = `${year}-${month}-${day}`;
 
   try {
     // Check if workout for today already exists
-    const existingWorkout = await Workout.findOne({ userId, date });
+    const existingWorkout = await Workout.findOne({
+      userId,
+      date: formattedDate,
+    });
     if (existingWorkout) {
       return next(errorHandler(400, "Workout for today already exists."));
     }
 
     // Create and save new workout
-    const workout = new Workout({ userId, date, exercises });
+    const workout = new Workout({ userId, date: formattedDate, exercises });
     await workout.save();
 
     res.status(201).json({ message: "Workout saved successfully!", workout });
@@ -26,25 +34,30 @@ export const allexercises = async (req, res, next) => {
   }
 };
 
-export const checkTodayWorkout = async (req, res, next) => {
-  const { userId } = req.body; // Destructure userId from request body
+export const checkWorkoutByDate = async (req, res, next) => {
+  const { userId, date } = req.body;
+
   if (!userId) {
-    return next(errorHandler(400, "User ID is required.")); // Return error if userId is not provided
+    return next(errorHandler(400, "User ID is required."));
   }
 
-  const date = new Date().setHours(0, 0, 0, 0); // Today's date without time
+  if (!date) {
+    return next(errorHandler(400, "Date is required."));
+  }
 
   try {
-    // Find if a workout exists for the given user and today's date
-    const existingWorkout = await Workout.findOne({ userId, date });
+    const existingWorkout = await Workout.findOne({
+      userId,
+      date: date,
+    });
 
     if (existingWorkout) {
-      return res.status(200).json({ exists: true, workout: existingWorkout }); // Return workout if exists
+      return res.status(200).json({ exists: true, workout: existingWorkout });
     } else {
-      return res.status(200).json({ exists: false }); // Workout does not exist
+      return res.status(200).json({ exists: false });
     }
   } catch (error) {
-    next(errorHandler(500, "An error occurred while checking the workout.")); // Handle any errors
+    next(errorHandler(500, "An error occurred while checking the workout."));
   }
 };
 
@@ -54,10 +67,18 @@ export const deleteTodayWorkout = async (req, res, next) => {
     return next(errorHandler(400, "User ID is required."));
   }
 
-  const date = new Date().setHours(0, 0, 0, 0);
+  const date = new Date();
+  const year = date.getFullYear(); // Gets the current year
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Gets the current month (0-11) and pads with a leading zero
+  const day = String(date.getDate()).padStart(2, "0"); // Gets the current day and pads with a leading zero
+
+  const formattedDate = `${year}-${month}-${day}`;
 
   try {
-    const existingWorkout = await Workout.findOneAndDelete({ userId, date });
+    const existingWorkout = await Workout.findOneAndDelete({
+      userId,
+      date: formattedDate,
+    });
 
     if (existingWorkout) {
       return res.status(200).json({

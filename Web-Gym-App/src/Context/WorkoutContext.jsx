@@ -7,16 +7,18 @@ const WorkoutContextProvider = (props) => {
     userId,
     setLoading,
     setError,
-    setTodaysWorkout
+    setTodaysWorkout,
+    date
   ) => {
     try {
-      // Check if workout exists
-      const checkResponse = await fetch("/api/workout/checkTodayWorkout", {
+      setLoading(true);
+
+      const checkResponse = await fetch("/api/workout/checkWorkoutByDate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userId, date }), // Send userId and date
       });
 
       if (!checkResponse.ok) {
@@ -26,17 +28,18 @@ const WorkoutContextProvider = (props) => {
 
       const checkData = await checkResponse.json();
 
-      // If workout exists, fetch workout data
+      // If workout exists, set workout data
       if (checkData.exists) {
         const workout = checkData.workout; // Get workout data from response
         setTodaysWorkout(workout);
       } else {
-        console.log("No workout submitted for today.");
+        console.log("No workout submitted for this date.");
+        setTodaysWorkout(null);
       }
     } catch (error) {
       setError(error.message); // Set error message if something goes wrong
     } finally {
-      setLoading(false); // Set loading to false after check
+      setLoading(false); // Stop loading after check
     }
   };
 

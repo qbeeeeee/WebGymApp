@@ -10,6 +10,9 @@ import pushUp from "./pushUp.svg";
 import seatedCableRows from "./seatedCableRows.svg";
 import shoulderPress from "./shoulderPress.svg";
 import defaultBack from "./defaultBack.svg";
+import legExercise from "./legExercise.svg";
+import bicepsExercise from "./bicepsExercise.svg";
+import tricepsExercise from "./tricepsExercise.svg";
 
 let chestExercises = [
   {
@@ -77,48 +80,109 @@ let backExercises = [
   },
 ];
 
-// let legExercises = [
-//   {
-//     id: 1,
-//     name: "Squat",
-//     image: squat,
-//   },
-//   {
-//     id: 2,
-//     name: "Leg Press",
-//     image: legPress,
-//   },
-//   {
-//     id: 3,
-//     name: "Leg Curl",
-//     image: legCurl,
-//   },
-// ];
+let legExercises = [
+  {
+    id: 1,
+    name: "Deadlift",
+    image: legExercise,
+  },
+  {
+    id: 2,
+    name: "Leg Press",
+    image: legExercise,
+  },
+  {
+    id: 3,
+    name: "Leg Curl",
+    image: legExercise,
+  },
+  {
+    id: 4,
+    name: "Squat",
+    image: legExercise,
+  },
+  {
+    id: 5,
+    name: "Leg Extension",
+    image: legExercise,
+  },
+  {
+    id: 6,
+    name: "Calf Raises",
+    image: legExercise,
+  },
+];
 
-// let bicepsExercises = [
-//   {
-//     id: 1,
-//     name: "Bicep Curl",
-//     image: bicepCurl,
-//   },
-//   {
-//     id: 2,
-//     name: "Hammer Curl",
-//     image: hammerCurl,
-//   },
-// ];
+let bicepsExercises = [
+  {
+    id: 1,
+    name: "Bicep Curl",
+    image: bicepsExercise,
+  },
+  {
+    id: 2,
+    name: "Hammer Curl",
+    image: bicepsExercise,
+  },
+  {
+    id: 3,
+    name: "EZ-Bar Curl",
+    image: bicepsExercise,
+  },
+  {
+    id: 4,
+    name: "Barbell Curl",
+    image: bicepsExercise,
+  },
+  {
+    id: 5,
+    name: "Cable Curl",
+    image: bicepsExercise,
+  },
+  {
+    id: 6,
+    name: "Incline Curl",
+    image: bicepsExercise,
+  },
+];
 
-// let tricepExercises = [
-//   {
-//     id: 1,
-//     name: "Tricep Extension",
-//     image: tricepExtension,
-//   },
-//   {
-//     id: 2,
-//     name: "Skull Crusher",
-//     image: skullCrusher,
-//   },
-// ];
+let tricepsExercises = [
+  {
+    id: 1,
+    name: "Push Down",
+    image: tricepsExercise,
+  },
+  {
+    id: 2,
+    name: "Overhead Triceps",
+    image: tricepsExercise,
+  },
+  {
+    id: 3,
+    name: "Cable One Arm",
+    image: tricepsExercise,
+  },
+  {
+    id: 4,
+    name: "Bench Dip",
+    image: tricepsExercise,
+  },
+  {
+    id: 5,
+    name: "Skull Crusher",
+    image: tricepsExercise,
+  },
+  {
+    id: 6,
+    name: "Dumbbell Kickback",
+    image: tricepsExercise,
+  },
+];
 
-export { chestExercises, backExercises };
+export {
+  chestExercises,
+  backExercises,
+  legExercises,
+  bicepsExercises,
+  tricepsExercises,
+};

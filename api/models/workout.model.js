@@ -8,7 +8,7 @@ const workoutSchema = new mongoose.Schema(
       required: true,
     },
     date: {
-      type: Date,
+      type: String,
       required: true,
       unique: true, // Ensures only one workout per user per day when combined with userId
     },
