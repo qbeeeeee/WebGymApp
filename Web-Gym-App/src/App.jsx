@@ -9,6 +9,7 @@ import SignUp from "./Pages/SignUp";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import AlreadySignIn from "./Components/PrivateRoute/AlreadySignIn";
 import AddWorkout from "./Pages/AddWorkout";
+import Graphs from "./Pages/Graphs";
 
 const App = () => {
   const location = useLocation();
@@ -29,6 +30,9 @@ const App = () => {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/addworkout" element={<AddWorkout />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/graphs" element={<Graphs />} />
         </Route>
       </Routes>
 

@@ -8,6 +8,8 @@ import TricepsWorkout from "../Components/TrackMyWorkout/WorkoutsText/TricepsWor
 import { useNavigate } from "react-router-dom";
 import { WorkoutContext } from "../Context/WorkoutContext";
 import { useSelector } from "react-redux";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const TrackMyWorkout = () => {
   const navigate = useNavigate();
@@ -18,6 +20,12 @@ const TrackMyWorkout = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    // Format the date to "YYYY-MM-DD"
+    const formattedDate = date ? date.toISOString().split("T")[0] : "";
+    setSelectedDate(formattedDate);
+  };
 
   useEffect(() => {
     const date = new Date();
@@ -40,7 +48,7 @@ const TrackMyWorkout = () => {
       <div className="text-red-500 text-md font-bold absolute left-[6%] top-[15%] flex gap-2">
         HOME / <div className="text-white">Track My Workout</div>
       </div>
-      <div className="text-white text-4xl mt-36 flex flex-col items-center">
+      <div className="text-white text-4xl font-semibold mt-36 flex flex-col items-center">
         Track Your Workout
         <hr className="w-[55%] h-1.5 mt-4 bg-red-500 border-0 " />
       </div>
@@ -51,13 +59,27 @@ const TrackMyWorkout = () => {
       />
 
       <div className="text-white mt-12 flex flex-col items-center gap-4">
-        <h1 className="text-lg">Or add your own date</h1>
+        {/* <h1 className="text-lg">Or add your own date</h1>
         <input
           type="text"
           placeholder="YYYY-MM-DD"
           className="border border-gray-600 w-[145px] text-white bg-neutral-800 rounded-md px-4 py-2 focus:outline-none focus:ring-1 
     focus:ring-red-500 focus:border-transparent transition duration-300 ease-in-out"
-        />
+        /> */}
+        {/* ----------TESTING---------- */}
+        <h1 className="text-lg">Add your own date</h1>
+        <div className="text-black flex items-center justify-center">
+          <DatePicker
+            selected={selectedDate ? new Date(selectedDate) : null}
+            onChange={handleDateChange}
+            dateFormat="yyyy-MM-dd"
+            showYearDropdown
+            showMonthDropdown
+            dropdownMode="select"
+            className="border border-gray-600 w-[125px] text-white bg-neutral-800 rounded-md px-4 py-2 focus:outline-none focus:ring-1 
+    focus:ring-red-500 focus:border-transparent transition duration-300 ease-in-out"
+          />
+        </div>
       </div>
 
       <div className="text-white text-4xl mt-10 flex flex-col items-center">

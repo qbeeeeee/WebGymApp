@@ -1,7 +1,7 @@
 import { errorHandler } from "../utils/error.js";
 import Workout from "../models/workout.model.js";
 
-export const allexercises = async (req, res, next) => {
+export const addTodaysWorkout = async (req, res, next) => {
   const { userId, exercises } = req.body;
   if (!userId || !exercises) {
     return next(errorHandler(400, "User ID and exercises are required."));
@@ -90,5 +90,27 @@ export const deleteTodayWorkout = async (req, res, next) => {
     }
   } catch (error) {
     next(errorHandler(500, "An error occurred while deleting the workout.")); // Handle any errors
+  }
+};
+
+export const getAllWorkoutsByUser = async (req, res, next) => {
+  const { userId } = req.body;
+
+  if (!userId) {
+    return next(errorHandler(400, "User ID is required."));
+  }
+
+  try {
+    const workouts = await Workout.find({ userId });
+
+    if (workouts.length > 0) {
+      return res.status(200).json({ exists: true, workouts });
+    } else {
+      return res.status(200).json({ exists: false, workouts: [] });
+    }
+  } catch (error) {
+    return next(
+      errorHandler(500, "An error occurred while retrieving workouts.")
+    );
   }
 };

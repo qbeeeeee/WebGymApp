@@ -36,7 +36,7 @@ const AddWorkout = () => {
           <span className="text-red-500">/</span> {exercise}
         </div>
       </div>
-      <div className="text-4xl mt-36 flex flex-col items-center">
+      <div className="text-4xl mt-36 font-semibold flex flex-col items-center">
         Add Workout
         <hr className="w-[55%] h-1.5 mt-4 bg-red-500 border-0 " />
       </div>

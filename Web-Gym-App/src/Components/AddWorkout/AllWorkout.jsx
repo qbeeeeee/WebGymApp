@@ -30,7 +30,7 @@ const AllWorkout = ({ allExercises, setAllExercises }) => {
       return;
     }
     try {
-      const res = await fetch("/api/workout/allexercises", {
+      const res = await fetch("/api/workout/addTodaysWorkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

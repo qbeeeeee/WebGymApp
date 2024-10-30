@@ -11,7 +11,7 @@ const navLinks = [
   { path: "/trackmyworkout", label: "Track My Workout" },
   { path: "/addworkout", label: "Add Workout" },
   { path: "/about", label: "About Us" },
-  { path: "/analytics", label: "Analytics" },
+  { path: "/graphs", label: "Graphs" },
   { path: "/contact", label: "Contact Us" },
 ];
 
