@@ -10,6 +10,7 @@ import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import AlreadySignIn from "./Components/PrivateRoute/AlreadySignIn";
 import AddWorkout from "./Pages/AddWorkout";
 import Graphs from "./Pages/Graphs";
+import ContactUs from "./Pages/ContactUs";
 
 const App = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/graphs" element={<Graphs />} />
         </Route>
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
 
       <NewsLetter isHomepage={isHomepage} />
