@@ -1,4 +1,4 @@
-# Spotify Clone
+# Web Gym App
 
 Welcome to the Web Gym App, a workout management tool built with React.js, Tailwind CSS, Express, Node.js, and MongoDB. This application allows you to create an account, log in, and add exercises to your routine. Track your progress over time by viewing previous workouts, and analyze your improvement through detailed diagrams and graphs.
 
@@ -8,8 +8,6 @@ You can see a video of the app here : [![Web Gym App]()](https://drive.google.co
 
 - [Features](#features)
 - [Screenshots](#screenshots)
-- [Usage](#usage)
-- [License](#license)
 - [Contact](#contact)
 
 ## Features
